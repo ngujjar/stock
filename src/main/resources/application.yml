@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stock_trading
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+alphavantage:
+  api:
+    key: D9OX2O2US5TBLY82
+
+---
+#spring:
+#  config:
+#    activate:
+#      on-profile: prod
+#  datasource:
+#    url: jdbc:postgresql://prod-server:5432/stock_trading
+#    username: prod_user
+#    password: prod_password
