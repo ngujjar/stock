@@ -23,14 +23,14 @@ public class StockService {
         return stockRepository.findBySymbol(symbol)
                 .orElseThrow(() -> new RuntimeException("Stock not found with symbol" + symbol));
     }
-    @Scheduled(fixedRate = 5000)
-    public void simulatePriceChanges(){
-        List<Stock> stocks = stockRepository.findAll();
-        for(Stock stock : stocks) {
-            double change = (random.nextDouble() - 0.5) * 5;
-            stock.setPrice(Math.max(1, stock.getPrice() + change));
-        }
-        stockRepository.saveAll(stocks);
-    }
+//    @Scheduled(fixedRate = 5000)
+//    public void simulatePriceChanges(){
+//        List<Stock> stocks = stockRepository.findAll();
+//        for(Stock stock : stocks) {
+//            double change = (random.nextDouble() - 0.5) * 5;
+//            stock.setPrice(Math.max(1, stock.getPrice() + change));
+//        }
+//        stockRepository.saveAll(stocks);
+//    }
 }
 

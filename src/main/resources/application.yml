@@ -1,15 +1,19 @@
 spring:
   profiles:
     active: dev
+
+# ===================== DEV (LOCAL) =====================
 ---
 spring:
   config:
     activate:
       on-profile: dev
+
   datasource:
     url: jdbc:postgresql://localhost:5432/stock_trading
     username: postgres
     password: postgres
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
@@ -19,16 +23,34 @@ spring:
       hibernate:
         format_sql: true
 
+server:
+  port: 8080
+
 alphavantage:
   api:
-    key: D9OX2O2US5TBLY82
+    key: ${ALPHAVANTAGE_KEY:D9OX2O2US5TBLY82}
 
+# ===================== PROD (RENDER) =====================
 ---
-#spring:
-#  config:
-#    activate:
-#      on-profile: prod
-#  datasource:
-#    url: jdbc:postgresql://prod-server:5432/stock_trading
-#    username: prod_user
-#    password: prod_password
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+server:
+  port: ${PORT:8080}
+
+alphavantage:
+  api:
+    key: ${ALPHAVANTAGE_KEY}
